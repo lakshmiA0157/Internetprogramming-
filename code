@@ -1,0 +1,47 @@
+<?php
+if (isset($_POST['submit'])) {
+    $name=$_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $city = $_POST['city'];
+
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $dbname = 'practice1';
+
+    $conn = mysqli_connect($host, $user, $pass, $dbname);
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $sql = "INSERT INTO practice0157 (Name,email, mobile, city) 
+            VALUES ('Name','$email', '$mobile', '$city')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Data inserted successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    mysqli_close($conn);
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+</head>
+<body>
+<form action="#" method="POST">
+    Name:<input type="text" name="name"><br>
+    Email: <input type="email" name="email"><br>
+    Mobile: <input type="number" name="mobile"><br>
+    City: <input type="text" name="city"><br>
+    <input type="submit" name="submit" value="Send Data"><br>
+</form>
+</body>
+</html>
